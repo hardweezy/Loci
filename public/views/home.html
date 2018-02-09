@@ -1,0 +1,280 @@
+<div ng-controller="homeController">
+  <div class="anq" id="app-growl"></div>
+  <nav class="ck pc os app-navbar">
+    <div class="by">
+      <div class="or">
+        <button type="button" class="ou collapsed" data-toggle="collapse" data-target="#navbar-collapse-main">
+          <span class="cv">Toggle navigation</span>
+          <span class="ov"></span>
+          <span class="ov"></span>
+          <span class="ov"></span>
+        </button>
+        <a class="e" href="">
+          <img src="assets/img/brand-white.png" alt="brand">
+        </a>
+      </div>
+
+      <div>
+      <!-- Display the search form,
+      comprising of a DropDown and an Input text
+      Events triggered here
+      @param select() - Highlights all text inside search input
+      @param fetch() - calls the $scope.fetch function after 2 seconds
+      @param ddSelectSelected - returns the text of the selected DropDown on change
+      @return selected Dropdown and search input
+      -->
+        <form class="form-inline headSearch">
+          <div class="form-group">
+            <div dropdown-select="ddSelectOptions" dropdown-model="ddSelectSelected" dropdown-item-label="text" dropdown-onchange="someMethod(selected)">
+            </div>
+          </div>
+          <div class="form-group">
+            <input onclick="select()" type="text" class="form-control" id="exampleInputEmail2" ng-paste="paste=true" ng-click="fetch()" ng-model="search" ng-model-options="{ debounce: 1000 }" autofocus placeholder="Enter Location: Cape Town">
+            <!-- <button type="submit" class="btn btn-success">Search</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="by amt">
+    <div class="gc">
+      <div class="gn">
+        <div class="qv rc aog alu">
+          <div class="qx" style="background-image: url(assets/img/unsplash_2.jpg);"></div>
+          <div class="qw dj">
+            <a href="">
+              <img class="aoh" src="assets/img/instagram_4.jpg">
+            </a>
+
+            <h5 class="qy">
+            <!--
+            Display authenticated User's Name
+            -->
+            <a class="aku" href="">{{currentUser.name}}</a>
+          </h5>
+            <!--
+            Display authenticated User's Email
+            -->
+            <p class="alu"> {{currentUser.email}}</p>
+
+            <ul class="aoi">
+              <li class="aoj">
+                          <!--
+            Display total size of stored Locations in DB since App's initialization for this User
+            -->
+                Locations
+                <h5 class="ali"><a class="aku" href="" ng-click="lstLocs()">{{locations.length || 0}}</a></h5>
+
+              </li>
+
+              <li class="aoj">
+                          <!--
+            Display total size of stored Pictures in DB since App's initialization for this User
+            -->
+                Photos
+                <h5 class="ali"><a class="aku" href="" ng-click="lstPics()">{{pictures.length || 0}}</a></h5>
+
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qv rc alu ss">
+          <div class="qw">
+            <h5 class="ald">Locations <small>· <a href="" ng-click="lstLocs()">View All</a></small></h5>
+            <ul class="qo anx">
+              <li class="qf alm" ng-repeat="venue in locations|limitTo:3">
+                <div class="qg">
+                  <strong>{{venue.venue_name}}</strong>
+                  <br/> {{venue.venue_category}}
+                  <br/> {{venue.venue_location}}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qv rc sm sp">
+          <div class="qw">
+            <h5 class="ald">Photos <small>· <a href="" ng-click="lstPics()">View All</a></small></h5>
+            <div data-grid="images" data-target-height="150">
+
+              <div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;" ng-repeat="image in pictures|limitTo:8">
+                <img data-width="640" data-height="640" data-action="zoom" ng-src="{{image.thumbUrl}}" ng-click="openStoredLightboxModal($index)" class="img-thumbnail" style="width: 106px; height: 106px;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qv rc aok">
+          <div class="qw">
+            © 2016 ImmediaApp
+            <a href="" ng-click="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="gv">
+        <ul class="ca qo anx">
+
+          <li class="qf b aml" ng-show="state == 'loaded'">
+            <p>Suggestions for <b>{{ddSelectSelected.text}}</b> near <b>{{search}}</b></p>
+          </li>
+          <li class="qf b aml" ng-show="state == 'loaded' || state == 'loadedLocationonLoad'">
+            <input type="text" class="form-control" style="width:100%" placeholder="Search" ng-model="place">
+
+          </li>
+           <!--
+            If state equals loaded from DOM, show this html
+            @return list of returned results from fetch() function
+            triggered by the search input change
+            -->
+          <li class="qf b aml" ng-show="state == 'loaded'" dir-paginate="venue in venues|filter:place|itemsPerPage:5" scope="" onload=""  pagination-id="loaded">
+            <a class="qj">
+              <img class="qh" data-width="185" data-height="174" data-action="zoom" ng-src="{{venue.picture_url}}" style="width: 185px; height: 174px; margin-bottom: 10px; margin-right: 0px; display:block; vertical-align: bottom;">
+            </a>
+            <div class="qg">
+              <strong>{{venue.name}}</strong>
+              <br/> {{venue.category}}
+              <br/> {{venue.location}}
+              <br/> {{venue.contact}}
+              <br/> {{venue.reviews}}
+              <br/> {{venue.url}}
+              <br/>
+              <div class="aoa">
+                <button class="cg ts fx" ng-click="fetchImage(venue.lat,venue.lng,venue.name,venue.id)" ng-model-options="{ debounce: 1000 }">
+                  Fetch Pictures</button>
+              </div>
+            </div>
+          </li>
+
+            <!--
+            If state equals loadedLocationonLoad from DOM, show this html
+            @return list of returned locations from stored locations $scope
+            triggered init() function
+            -->
+          <li class="qf b aml" ng-show="state == 'loadedLocationonLoad'" dir-paginate="venue in locations|filter:place|itemsPerPage:6" scope="" onload="" pagination-id="loadedLocationonLoad">
+            <a class="qj">
+              <img class="qh" data-width="185" data-height="174" data-action="zoom" ng-src="{{venue.venue_photoURL}}" style="width: 185px; height: 174px; margin-bottom: 10px; margin-right: 0px; display:block; vertical-align: bottom;">
+            </a>
+            <div class="qg">
+              <strong>{{venue.venue_name}}</strong>
+              <br/> {{venue.venue_category}}
+              <br/> {{venue.venue_location}}
+              <br/> {{venue.venue_contact}}
+              <br/> {{venue.venue_url}}
+              <br/>
+              <div class="aoa">
+                <button class="cg ts fx" ng-click="fetchImage(venue.venue_lat,venue.venue_lng,venue.venue_name,venue.venue_id)" ng-model-options="{ debounce: 1000 }">
+                  View Pictures</button>
+              </div>
+            </div>
+          </li>
+
+          <li class="qf b aml" ng-show="state == 'isLoading'">
+            <p><strong>Loading</strong></p>
+          </li>
+
+          <li class="qf b aml" ng-show="state == 'noResult'">
+            <p><strong>No results found</strong></p>
+          </li>
+
+        </ul>
+        <!-- Pagination Block, responsible for adding pagination to Results returned by Foursquare API, Flickr API,
+        and Database result-->
+        <div class=" rc aok text-center" ng-show="state == 'loaded'">
+          <div class="qw">
+            <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" pagination-id="loaded">
+            </dir-pagination-controls>
+          </div>
+        </div>
+
+                <!-- Pagination Block, responsible for adding pagination to Results returned by Foursquare API, Flickr API,
+        and Database result-->
+        <div class=" rc aok text-center" ng-show="state == 'loadedLocationonLoad'" >
+          <div class="qw">
+            <dir-pagination-controls max-size="6" direction-links="true" boundary-links="true" pagination-id="loadedLocationonLoad">
+            </dir-pagination-controls>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="gr">
+
+
+        <div class="qv rc sm sp" ng-show="secondState == 'loadedPicture'">
+          <div class="qw">
+            <ul class="qo anx">
+              <li class="qf alm">
+                <input type="text" class="form-control" style="width:100%" placeholder="Search" ng-model="searchPictures">
+
+              </li>
+            </ul>
+            <h5 class="ald">{{selected_venue}} <small>{{photos.length}}</small></h5>
+            <div data-grid="images" data-target-height="150">
+
+              <div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;"dir-paginate="image in photos|filter:searchPictures|itemsPerPage:18" pagination-id="loadedPicture">
+                <img data-width="640" data-height="640" data-action="zoom" ng-src="{{image.thumbUrl}}" ng-click="openLightboxModal($index)" class="img-thumbnail" style="width: 106px; height: 106px;">
+              </div>
+            </div>
+
+          </div>
+        </div>
+                        <!-- Paginate for Picture Div, Show this if secodstate in DOM equals loadedPicturesonLoad-->
+
+                    <div class="rc aok text-center" ng-show="secondState == 'loadedPicture'" >
+              <div class="qw">
+                <dir-pagination-controls max-size="18" direction-links="true" boundary-links="true" pagination-id="loadedPicture">
+                </dir-pagination-controls>
+              </div>
+            </div>
+
+        <div class="qv rc sm sp" ng-show="secondState == 'loadedPicturesonLoad'">
+          <div class="qw">
+            <ul class="qo anx">
+              <li class="qf alm">
+                <input type="text" class="form-control" style="width:100%" placeholder="Search" ng-model="searchPictures">
+
+              </li>
+            </ul>
+            <div data-grid="images" data-target-height="150">
+
+              <div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;" dir-paginate="image in pictures|filter:searchPictures|itemsPerPage:15" pagination-id="loadedPicturesonLoad">
+                <img data-width="640" data-height="640" data-action="zoom" ng-src="{{image.thumbUrl}}" ng-click="openStoredLightboxModal($index)" class="img-thumbnail" style="width: 106px; height: 106px;">
+              </div>
+            </div>
+          </div>
+        </div>
+                <!-- Paginate for Picture Div, Show this if secodstate in DOM equals loadedPicturesonLoad-->
+
+                    <div class="rc aok text-center" ng-show="secondState == 'loadedPicturesonLoad'" >
+              <div class="qw">
+                <dir-pagination-controls max-size="15" direction-links="true" boundary-links="true" pagination-id="loadedPicturesonLoad">
+                </dir-pagination-controls>
+              </div>
+            </div>
+        <!-- Pictures Div on far right, Show this if secodstate in DOM equals isLoading-->
+        <div class="qv rc sm sp" ng-show="secondState == 'isLoading'">
+         <ul class="ca qo anx">
+         <li class="qf b aml">
+            <p><strong>Loading</strong></p>
+          </li>
+
+        </ul>
+        </div>
+        <!-- Pictures Div on far right, Show this if secodstate in DOM equals noResult-->
+         <div class="qv rc sm sp" ng-show="secondState == 'noResult'">
+         <ul class="ca qo anx">
+         <li class="qf b aml">
+            <p><strong>No results found</strong></p>
+          </li>
+
+        </ul>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

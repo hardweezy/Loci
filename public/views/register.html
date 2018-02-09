@@ -1,0 +1,25 @@
+<div class="gb ut" ng-controller="authController">
+  <div class="uv" id="box">
+    <form role="form" class="alq dj j" method="post" name="regForm">
+      <img src="http://bootstrap-themes.github.io/application/assets/img/brand.png" alt="brand" class="l amb">
+      <!--Error Box-->
+      <div class="alert alert-{{alert_type}}" ng-hide="regError">{{errorText}}</div>
+      <!--End Error Box -->
+      <div class="et">
+        <input type="text" class="form-control" placeholder="Full Name" ng-model="newUser.name" ng-minlength="3" required>
+      </div>
+      <div class="et">
+        <input type="email" class="form-control" placeholder="name@company.com" ng-model="newUser.email" ng-minlength="6" required>
+      </div>
+      <div class="et">
+        <input type="password" class="form-control" placeholder="Password" ng-model="newUser.password" ng-minlength="6" required>
+      </div>
+      <div class="amb">
+        <button class="cg fp" ng-click="register()" ng-disabled="regForm.$invalid">Join For Free</button>
+      </div>
+      <footer class="apd">
+        <a href="#login" class="dp">Return to Login</a>
+      </footer>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="gb ut" ng-controller="authController">
+    <div class="uv" id="box">
+        <form role="form" class="alq dj j" method="post" name="loginform" ng-submit="login()">
+            <img src="http://bootstrap-themes.github.io/application/assets/img/brand.png" alt="brand" class="l amb">
+            <!--Error Box-->
+            <div class="alert alert-danger" ng-hide="loginError">
+            {{loginErrorText}}
+            </div>
+            <!--End Error Box -->
+            <div class="et">
+                <input type="email" class="form-control" ng-model="email"  placeholder="name@yourname.com" ng-minlength="5" required autofocus />
+            </div>
+            <div class="et alu">
+                <input type="password" class="form-control" ng-model="password" placeholder="Password" ng-minlength="6" required>
+            </div>
+            <div class="amb" >
+                <button class="cg fp" type="butoon" ng-disabled="loginform.$invalid">Log In</button>
+                <button class="cg fm" ng-click="signup()">Sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
