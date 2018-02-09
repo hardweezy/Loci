@@ -1,4 +1,4 @@
-Location and Imagery Application using PHP, AngularJS
+Location and Imagery Application using PHP, Laravel@5.3, AngularJS@1.0
 @author Solomon Omokehinde
 @version 1.0.6
 @year 2016
