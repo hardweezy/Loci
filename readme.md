@@ -9,7 +9,6 @@
 
 [Flickr](https://www.flickr.com/services/api/)
 
-[Google Places](https://developers.google.com/places/)
 
 ## Setup
 
@@ -42,8 +41,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Powered By
 
-<p align="center">
-Laravel, AngularJS
+<p align="left">
+Laravel, AngularJS, BootStrap
 </p>
 
 
