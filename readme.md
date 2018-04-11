@@ -1,133 +1,59 @@
-Location and Imagery Application using PHP, Laravel@5.3, AngularJS@1.0
+# Location and Imagery Application using PHP, Laravel@5.3, AngularJS@1.0
 @author Solomon Omokehinde
 @version 1.0.6
 @year 2016
 
+## API Keys needed
 
-===================================================
-#Requirements to Running App
-===================================================
+[Foursquare](https://developer.foursquare.com/)
 
-PHP >= 5.6.4
-OpenSSL PHP Extension
-PDO PHP Extension
-Mbstring PHP Extension
-Tokenizer PHP Extension
-XML PHP Extension
-MYSQL >=5.5.*
-Composer
+[Flickr](https://www.flickr.com/services/api/)
 
-This Application was developed using Laravel Framework, laravel utilizes Composer (http://getcomposer.org/) to manage its dependencies. So, before using this App, make sure you have composer installed on your machine.
+[Google Places](https://developers.google.com/places/)
 
+## Setup
 
-===================================================
-#Local Development Server
-===================================================
-If you have PHP installed locally and you would like to use PHP's built-in development server to serve this application, you may use the serve Artisan command. This command will start a development server at http://localhost:8000:
+1. clone the repository with `git clone https://github.com/hardweezy/Loci.git`
+2. `cd Loci`
+3. `composer install`
+4. `php artisan key:generate`
+5. edit .env file and set your db credentials and api keys
+6. make sure your database is created in your local mysql instance, default db name is loci
+7. `php artisan migrate`
+8. `php artisan serve`
 
--------------------
-#on Mac
--------------------
-Open Terminal
-Change Directory to the project folder of this App
-Run php artisan serve
+## Running the Dev Server
 
--------------------
-#on Windows
--------------------
-Open CMD
-Change Directory to the project folder of this App
-Run php artisan serve
+```bash
+> php artisan serve
+```
 
-===================================================
-#Environment Configuration
-===================================================
-The root directory of this project folder will contain a .env file
-All of the variables listed in this file will be loaded into the $_ENV PHP super-global when the application receives a request.
+## Working With JavaScript
 
-You are encouraged to change the following global variables
-DB_CONNECTION=mysql //this app runs smoothly with MYSQL as the DB Engine
-DB_HOST=
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+```bash
+> npm run watch
+```
 
-After Changing the above variables
-Run php artisan migrate in your terminal/CMD
+## Licenses
 
-This moves all needed tables to support the Application into your Database 
-using the credentials you supplied above
+Loci is licenced under [WTFPL (Do What the Fuck You Want To Public License)](http://www.wtfpl.net/about/)
 
-===================================================
-#Contributors
-===================================================
-. AngularJS
-. Angular UI Router
-. Satellizer
-. ALT Three Locker
-. Tymon JWT Auth
-. Angular Util Pagination
-. Angular UI Bootstrap
-. Angular LightBox
-. Laravel Framework
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Powered By
+
+<p align="center">
+Laravel, AngularJS
+</p>
 
 
-===================================================
-#TroubleShooting
-===================================================
 
-1. Missing/Unidentified Application Key
-------------------------------------------------
-Run the  php artisan key:generate command.
+## ToDos
 
-Typically, this string should be 32 characters long. The key can be set in the .env environment file. If the application key is not set, your user sessions and other encrypted data will not be secure!
-
-
-2. Invalid URL in console.log
-------------------------------------------------
-If you are using any other address apart from the default http://localhost:8000
-Go into public directory
-into js folder
-open app.js and change the address on line 12 
-## .constant('API_URL', 'http://localhost:8000/api/v1')
-Kindly change the entry before api/v1. Do not change this path "api/v1"
-
-3. App won't Run
-------------------------------------------------
-install a new Laravel Project by issuing the Composer create-project command in your terminal:
-composer create-project --prefer-dist laravel/laravel newProject
-
-Copy contents of this App's composer.json which can be found in the root directory into the newly installed Laravel Project's composer.json
-
-Run composer update command in your terminal
-
-This downloads the required files
-
-Create files if not present/Copy and Replace these files from this Project Directory to the newly installed Laravel project
---app/Http
---app/Location.php
---app/Picture.php
---app/User.php
-
---config/app.php
---config/jwt.php
---config/locker.php
-
---node_modules
---public
-
---resources/views/index.php
-
-===================================================
-#ToDos
-===================================================
 1. Improve Image Lightbox Directive
 2. Improve the location input control by adding GeoNames
 3. Allow user's email to fetch public avatar from Facebook, Instagram API
 4. Improve on results display of images and location listings
 
-===================================================
-#Vulnerability
-===================================================
+## Vulnerability
 In case of any reported bug. send an email to solomonomokehinde@gmail.com

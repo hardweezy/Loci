@@ -52,6 +52,18 @@ angular.module('locApp').controller('homeController', function(Lightbox, $auth, 
     };
 
     /**
+     * [foursquare_clientID]
+     * [foursquare_clientSecret]
+     * @type {String} [read more at developer.foursquare]
+     * @return { needed to make successful API calls} 
+     */
+    var foursquare_clientID = "OBKEDINEHY3KGRQSPX4A1OJIPYJI5EYFBRCGQWR42OAIZ3K3";
+    var foursquare_clientSecret = "HHOU2X2S0TKGJIYAV0HDTF2A2KOSUBWSAZED4WZIIUG2T4CS";
+
+    /** @type {String} [need this API key from FLickr to make calls to it] */
+    var flikr_api_key = "7e1b66cdfced6b6e10a85a67e2aba08a";
+
+    /**
      * [ddSelectOptions directive to populate dropdown on things to search]
      * @type {Array}
      * @return {text as key} [value as value]
@@ -116,14 +128,6 @@ angular.module('locApp').controller('homeController', function(Lightbox, $auth, 
          */
         $scope.state = "isLoading";
 
-        /**
-         * [foursquare_clientID]
-         * [foursquare_clientSecret]
-         * @type {String} [read more at developer.foursquare]
-         * @return { needed to make successful API calls} 
-         */
-        var foursquare_clientID = "OBKEDINEHY3KGRQSPX4A1OJIPYJI5EYFBRCGQWR42OAIZ3K3";
-        var foursquare_clientSecret = "HHOU2X2S0TKGJIYAV0HDTF2A2KOSUBWSAZED4WZIIUG2T4CS";
 
         /**
          * [https.jsonp fetch venues from foursquare that matches searched queries]
@@ -220,6 +224,8 @@ angular.module('locApp').controller('homeController', function(Lightbox, $auth, 
      */
     $scope.parseVenue = function(data) {
         var venue = data.venue;
+        if(!venue) return;
+        
         return {
             id: venue.id,
             name: venue.name,
@@ -255,10 +261,6 @@ angular.module('locApp').controller('homeController', function(Lightbox, $auth, 
          * @type {String}
          */
         $scope.secondState = "isLoading";
-
-
-        /** @type {String} [need this API key from FLickr to make calls to it] */
-        var flikr_api_key = "7e1b66cdfced6b6e10a85a67e2aba08a";
 
         /**
          * [https this call gets the place_id from flickr 

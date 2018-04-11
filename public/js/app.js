@@ -9,7 +9,7 @@ var app = angular.module('locApp', ['angularUtils.directives.dirPagination', 'ui
  * [description]
  * @param  API_URL                       [returns a constant variable to be used throughout the app]
  */
-.constant('API_URL', 'http://localhost:8000/api/v1')
+.constant('API_URL', 'https://loci.dev/api/v1')
     /**
      * [description]
      * @param  $stateProvider                    [configure my views]
