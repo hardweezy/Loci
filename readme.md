@@ -53,6 +53,3 @@ Laravel, AngularJS, BootStrap
 2. Improve the location input control by adding GeoNames
 3. Allow user's email to fetch public avatar from Facebook, Instagram API
 4. Improve on results display of images and location listings
-
-## Vulnerability
-In case of any reported bug. send an email to solomonomokehinde@gmail.com
