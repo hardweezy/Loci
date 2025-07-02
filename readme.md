@@ -6,7 +6,6 @@
 ## API Keys needed
 
 [Foursquare](https://developer.foursquare.com/)
-
 [Flickr](https://www.flickr.com/services/api/)
 
 
@@ -19,7 +18,7 @@
 5. edit .env file and set your db credentials and api keys
 6. make sure your database is created in your local mysql instance, default db name is loci
 7. `php artisan migrate`
-8. `php artisan serve`.
+8. `php artisan serve`
 
 ## Running the Dev Server
 
